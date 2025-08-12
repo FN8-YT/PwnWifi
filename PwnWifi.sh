@@ -1,6 +1,11 @@
 #!/bin/bash
 
 # Author: @FN8
+figlet "FN8"
+echo "Redes Sociales:"
+echo "https://www.youtube.com/@FN8_"
+echo "https://www.instagram.com/fn8___/"
+sleep 2
 
 #Colours
 green="\e[0;32m\033[1m"
@@ -58,7 +63,8 @@ function dependencies(){
 }
 
 function startAttack(){
-	clear
+	airmon-ng check kill > /dev/null 2>&1
+ 	clear
     echo -e "\n${yellow}[+]${end} ${gray}Configurando tarjeta en modo monitor${end}${blue}...${end}"
     airmon-ng start $networkCard > /dev/null 2>&1
     ifconfig $networkCard down && macchanger -a $networkCard > /dev/null 2>&1
