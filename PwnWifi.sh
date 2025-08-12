@@ -60,7 +60,6 @@ function dependencies(){
 function startAttack(){
 	clear
     echo -e "\n${yellow}[+]${end} ${gray}Configurando tarjeta en modo monitor${end}${blue}...${end}"
-    airmon-ng check kill > /dev/null 2>&1
     airmon-ng start $networkCard > /dev/null 2>&1
     ifconfig $networkCard down && macchanger -a $networkCard > /dev/null 2>&1
     ifconfig $networkCard up; killall dhclient wpa_supplicant 2>/dev/null # matamos los procesos complictivos
